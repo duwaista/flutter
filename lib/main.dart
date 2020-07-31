@@ -50,7 +50,7 @@ class MyStatelessWidget extends StatelessWidget {
     return Scaffold(
       key: scaffoldKey,
       appBar: AppBar(
-        title: const Text('AppBar Demo'),
+        title: const Text('Demo'),
         leading: Builder(
           builder: (BuildContext context) {
             return IconButton(
@@ -81,6 +81,20 @@ class MyStatelessWidget extends StatelessWidget {
         child: Text(
           'This is the home page',
           style: TextStyle(fontSize: 24),
+        ),
+      ),
+      drawer: Drawer(
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              const Text('This is the Drawer'),
+              RaisedButton(
+                onPressed: () {Navigator.of(context).pop();},
+                child: const Text('Close Drawer'),
+              ),
+            ],
+          ),
         ),
       ),
     );
