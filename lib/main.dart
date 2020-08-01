@@ -4,6 +4,7 @@
 // opens a [SnackBar], while the second action navigates to a new page.
 
 import 'package:flutter/material.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 
 void main() => runApp(MyApp());
 
@@ -23,6 +24,16 @@ class MyApp extends StatelessWidget {
 final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 final SnackBar snackBar = const SnackBar(content: Text('Showing Snackbar'));
 
+final List<String> imgList = [
+  'https://sun1-21.userapi.com/cPaSLP4xKybNNqwy2Elbni61NXeBj3dfH6131g/8LkcYHEPUik.jpg',
+  'https://sun1-93.userapi.com/SZJOT-nxlvP6Vp27AaCdActkAewg4b2LBYa8pQ/yyaSDiigwLA.jpg',
+  'https://sun1-92.userapi.com/dq61SwP0HHNtBIrpaX0eUkKc8CPBAWcbAwrLkg/CcLJWv7mxmA.jpg',
+  'https://sun9-73.userapi.com/c206828/v206828309/169781/iiiafsESCDQ.jpg',
+  'https://sun1-95.userapi.com/yecCstOP5OEz6VVnJju41mAruSioked1oAn1ag/XqZzLZ-mwNA.jpg',
+  'https://sun1-96.userapi.com/THf4V-POziALd8H6KZnAu6PLYE32sLsbqJVOgw/3qYJHHFPyEg.jpg',
+  'https://sun1-93.userapi.com/4v_2k-cIDrTVGeXaJ9LhcnR7lVW3kxNPvAzXcw/0sYz5_SclXM.jpg'
+  ];
+
 void openPage(BuildContext context) {
   Navigator.push(context, MaterialPageRoute(
     builder: (BuildContext context) {
@@ -30,11 +41,22 @@ void openPage(BuildContext context) {
         appBar: AppBar(
           title: const Text('Next page'),
         ),
-        body: const Center(
-          child: Text(
-            'This is the next page',
-            style: TextStyle(fontSize: 24),
-          ),
+        body: Center(
+        child: Container(
+            margin: EdgeInsets.all(5.0),
+          child: CarouselSlider(
+            options: CarouselOptions(
+              aspectRatio: 1.0,
+              enlargeCenterPage: true,
+              enableInfiniteScroll: false,
+            ),
+            items: imgList.map((item) => Container(
+              child: Center(
+                  child: Image.network(item, fit: BoxFit.cover, width: 1000)
+              ),
+            )).toList(),
+          )
+        ),
         ),
       );
     },
