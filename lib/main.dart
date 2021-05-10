@@ -1,8 +1,6 @@
-// Flutter code sample for AppBar
-
-// This sample shows an [AppBar] with two simple actions. The first action
-// opens a [SnackBar], while the second action navigates to a new page.
-
+import 'package:first_app/pages/about.dart';
+import 'package:first_app/pages/sign-in.dart';
+import 'package:first_app/widgets/feed-list.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(MyApp());
@@ -17,12 +15,16 @@ class MyApp extends StatelessWidget {
       title: _title,
       theme: ThemeData(primaryColor: Colors.white),
       home: MyStatelessWidget(),
+      routes: <String, WidgetBuilder>{
+        'about': (BuildContext context) => AboutPage(),
+        'sign-in': (BuildContext context) => SignInPage(),
+        'feed': (BuildContext context) => FeedList()
+      },
     );
   }
 }
 
 final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-final SnackBar snackBar = const SnackBar(content: Text('Showing Snackbar'));
 
 /// This is the stateless widget that the main application instantiates.
 class MyStatelessWidget extends StatelessWidget {
@@ -39,9 +41,7 @@ class MyStatelessWidget extends StatelessWidget {
           IconButton(
             icon: const Icon(Icons.add_alert),
             tooltip: 'Show Snackbar',
-            onPressed: () {
-              scaffoldKey.currentState.showSnackBar(snackBar);
-            },
+            onPressed: () {},
           ),
           Builder(
             builder: (BuildContext context) {
@@ -72,16 +72,21 @@ class MyStatelessWidget extends StatelessWidget {
           ),
           ListTile(
             title: Text('Главная'),
-            onTap: () {},
+            onTap: () {
+              Navigator.pushNamed(context, 'feed');
+            },
           ),
           ListTile(
             title: Text('О проекте'),
-            onTap: () {},
+            onTap: () {
+              Navigator.pushNamed(context, 'about');
+            },
           ),
           ListTile(
-            title: Text('Выйти'),
-            onTap: () {},
-          ),
+              title: Text('Войти'),
+              onTap: () {
+                Navigator.pushNamed(context, 'sign-in');
+              }),
         ],
       )),
     );
